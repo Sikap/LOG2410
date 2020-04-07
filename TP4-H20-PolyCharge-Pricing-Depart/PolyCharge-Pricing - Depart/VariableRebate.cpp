@@ -32,10 +32,10 @@ namespace PolyCharge
 		// Apply distinct rebates to subscription and energy
 		 // To be completed
 		Amount cost = m_plan.computeCost(charge);
-		cost -= m_plan.getSubscriptionCost();
+		cost -= getSubscriptionCost();
 		cost *= 1 - m_energyRebate;
-		cost += (1 - m_subscriptionRebate)* m_plan.getSubscriptionCost();
-
+		cost += (1 - m_subscriptionRebate)* getSubscriptionCost();
+		
 		return cost;
 	}
 
@@ -72,7 +72,7 @@ namespace PolyCharge
 
 	void VariableRebate::processFixedRebate(FixedRebate& rebate) {
 		// To be completed
-		m_subscriptionRebate = m_energyRebate = m_basePercent;
+		rebate.getPlan().accept(*this);
 	}
 
 
