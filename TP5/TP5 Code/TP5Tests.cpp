@@ -19,10 +19,27 @@ namespace PolyCharge
 	void TP5Tests::testFactory()
 	{
 		std::cerr << std::boolalpha;
+
+		// On vérifie le type de l'objet créé par le patron Factory
+		AbsPlanFactory* planFactory = new PremiumPlanFactory();
+		auto p = planFactory->createPlan();
+		bool testSuccess = p->name() == "PremiumUser";
+		std::cerr << "Test du patron Factory : " << testSuccess << std::endl;
 	}
 
 	void TP5Tests::testSingleton()
 	{
+		bool testSuccess = false;
+		
+		// On vérifie si la double instanciation équivaut à une simple instanciation
+		auto s = &PlanManager::getInstance();
+		auto p = &(s->getInstance());
+
+		if (p == s) {
+			testSuccess |= true;
+		}
+
+		std::cerr << "Test du patron Singleton : " << testSuccess << std::endl;
 	}
 
 	void TP5Tests::testMediator()
