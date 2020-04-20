@@ -11,8 +11,10 @@
 #include "AbsSubscriptionPlan.h"
 #include "PlanManager.h"
 #include "PremiumPlanFactory.h"
+#include "RegularPlanFactory.h"
 #include "PremiumUserPlan.h"
 #include "RebateManager.h"
+#include "FixedRebateFactory.h"
 
 namespace PolyCharge
 {
@@ -24,11 +26,14 @@ namespace PolyCharge
 		AbsPlanFactory* planFactory = new PremiumPlanFactory();
 		auto p = planFactory->createPlan();
 		bool testSuccess = p->name() == "PremiumUser";
+
 		std::cerr << "Test du patron Factory : " << testSuccess << std::endl;
+
 	}
 
 	void TP5Tests::testSingleton()
 	{
+
 		bool testSuccess = false;
 		
 		// On vérifie si la double instanciation équivaut à une simple instanciation
@@ -40,6 +45,8 @@ namespace PolyCharge
 		}
 
 		std::cerr << "Test du patron Singleton : " << testSuccess << std::endl;
+			
+
 	}
 
 	void TP5Tests::testMediator()
