@@ -11,18 +11,39 @@
 #include "AbsSubscriptionPlan.h"
 #include "PlanManager.h"
 #include "PremiumPlanFactory.h"
+#include "RegularPlanFactory.h"
 #include "PremiumUserPlan.h"
 #include "RebateManager.h"
+#include "FixedRebateFactory.h"
 
 namespace PolyCharge
 {
 	void TP5Tests::testFactory()
 	{
-		std::cerr << std::boolalpha;
+		
+		AbsPlanFactory* planFactory = new PremiumPlanFactory();
+		auto p = planFactory->createPlan();
+		bool testSuccess = p->name() == "PremiumUser";
+		std::cerr << "Test du patron Factory : " << testSuccess << std::endl;
+
 	}
 
 	void TP5Tests::testSingleton()
 	{
+		bool testSuccess = true;
+		auto p = PremiumPlanFactory::PremiumPlanFactory();
+
+		// On teste l'ajout du plan dans le conteneur m_plans
+		
+		try {
+			PlanManager::getInstance();
+		}
+		catch (std::exception e) {
+			
+			testSuccess &= false;
+		}
+		std::cerr << "Test du patron Singleton : " << testSuccess << std::endl;
+			
 	}
 
 	void TP5Tests::testMediator()
